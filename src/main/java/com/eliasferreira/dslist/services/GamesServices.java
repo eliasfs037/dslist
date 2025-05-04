@@ -1,10 +1,12 @@
 package com.eliasferreira.dslist.services;
 
+import com.eliasferreira.dslist.dto.GameDTO;
 import com.eliasferreira.dslist.dto.GamesMinDTO;
 import com.eliasferreira.dslist.entities.Games;
 import com.eliasferreira.dslist.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,6 +14,15 @@ import java.util.List;
 public class GamesServices {
     @Autowired
     private GameRepository gameRepository;
+
+    @Transactional(readOnly = true)
+    public GameDTO findById(Long id) {
+        Games result = gameRepository.findById(id).get();
+        GameDTO dto = new GameDTO(result); //construtor para transformar game em gameDto
+        return dto;
+    }
+
+    @Transactional(readOnly = true)
     public List<GamesMinDTO> findAll(){
         List<Games> result = gameRepository.findAll();
         List<GamesMinDTO> dto = result.stream().map(x -> new GamesMinDTO(x)).toList();

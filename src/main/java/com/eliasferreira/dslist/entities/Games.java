@@ -20,6 +20,7 @@ public class Games {
     private Double score;
     private String imgUrl;
 
+
     @Column(columnDefinition = "TEXT")
     private String shortDescription;//descrição curta
 
@@ -112,7 +113,7 @@ public class Games {
         this.year = year;
     }
 
-    //como que faz para comparar um game com o outro? (comparar dois objetos)
+    //como que faz para comparar um game com o outro? (comparar dois objetos), vamos comparar esse dois games pelo ID
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
